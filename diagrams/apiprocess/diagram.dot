@@ -1,0 +1,52 @@
+digraph git_basics {
+	graph [
+		label = "Proces přidávání nových služeb\n\n"
+		labelloc = t
+		fontname = "Helvetica,Arial,sans-serif"
+		fontsize = 20
+		layout = dot
+		rankdir = LR
+		newrank = true
+	]
+	node [
+		style=filled
+		shape=rect
+		pencolor="#00000044" // frames color
+		fontname="Helvetica,Arial,sans-serif"
+		shape=plaintext
+	]
+	edge [
+		arrowsize=0.5
+		fontname="Helvetica,Arial,sans-serif"
+		labeldistance=3
+		labelfontcolor="#00000080"
+		penwidth=2
+		style=dotted // dotted style symbolizes data transfer
+	]
+	task  [
+		color="#88000022"
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr> <td> <b>Jira Task</b><br/></td> </tr>
+			<tr> <td align="left"><i>Input: </i><br align="left"/>
+			openapi
+			<br align="left"/></td> </tr>
+		</table>>
+		shape=plain
+	]
+	include [
+		fillcolor="#ff880022"
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr> <td align="left"> <b>Include file</b><br/></td> </tr>
+		</table>>
+		shape=plain
+	]
+	task -> include [label="swag2nginx <URL> ..." color="#88000088"]
+	template [
+		fillcolor="#0044ff22"
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr> <td align="left"> <b>helm subtemplate</b><br/></td> </tr>
+		</table>>
+		shape=plain
+	]
+	include -> template [label="review" color="#88000088"]
+}
