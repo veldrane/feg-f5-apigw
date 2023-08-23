@@ -35,9 +35,9 @@ with Diagram("Api Gateway example", show=True, outformat="svg", graph_attr=graph
         apigw1 = APIGateway("API Gateway")
  
     # propojeni uzlu grafu orientovanymi hranami
-    fe1 >> Edge(minlen="6", label="REST") >> apigw1
-    fe2 >> Edge(minlen="6", label="REST") >> apigw1
-    fe3 >> Edge(minlen="6", label="REST") >> apigw1
-    fe4 >> Edge(minlen="6", label="REST") >> apigw1
+    fe1 >> Edge(minlen="6", label="REST", fontsize="18", fontname="Arial Bold") >> apigw1
+    fe2 >> Edge(minlen="6", label="REST", fontsize="18", fontname="Arial Bold") >> apigw1
+    fe3 >> Edge(minlen="6", label="REST", fontsize="18", fontname="Arial Bold") >> apigw1
+    fe4 >> Edge(minlen="6", label="REST", fontsize="18", fontname="Arial Bold") >> apigw1
     apigw1 >> Edge(minlen="6") >> bes1
 

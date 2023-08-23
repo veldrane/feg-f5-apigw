@@ -1,6 +1,6 @@
 digraph git_basics {
 	graph [
-		label = "Proces přidávání nových služeb\n\n"
+		label = ""
 		labelloc = t
 		fontname = "Helvetica,Arial,sans-serif"
 		fontsize = 20
@@ -27,26 +27,70 @@ digraph git_basics {
 		color="#88000022"
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
 			<tr> <td> <b>Jira Task</b><br/></td> </tr>
-			<tr> <td align="left"><i>Input: </i><br align="left"/>
-			openapi
-			<br align="left"/></td> </tr>
+			<tr> <td align="left">Description<br align="left"/><br align="left"/></td> </tr>
 		</table>>
 		shape=plain
 	]
-	include [
+	swag2nginx [
 		fillcolor="#ff880022"
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
-			<tr> <td align="left"> <b>Include file</b><br/></td> </tr>
+			<tr> <td align="left"> <b>Swag2Nginx</b><br/></td> </tr>
+			<tr> <td align="left"><i>Input: </i><br align="left"/><br align="left"/>openapi.json<br align="left"/>go template<br align="left"/></td></tr>
 		</table>>
 		shape=plain
 	]
-	task -> include [label="swag2nginx <URL> ..." color="#88000088"]
+	task -> swag2nginx [label="review" color="#88000088"]
+	include [
+		fillcolor="#0044ff22"
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr> <td align="left"> <b>nginx include</b><br/></td> </tr>
+		</table>>
+		shape=plain
+	]
+	swag2nginx -> include [label="" color="#88000088"]
 	template [
 		fillcolor="#0044ff22"
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
-			<tr> <td align="left"> <b>helm subtemplate</b><br/></td> </tr>
+			<tr> <td align="left"> <b>helm template</b><br/></td> </tr>
 		</table>>
 		shape=plain
 	]
-	include -> template [label="review" color="#88000088"]
+	include -> template [label="rewrite" color="#88000088"]
+	value [
+		fillcolor="#88008822"
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr> <td align="left"><b>values.yaml</b></td> </tr>
+			<tr> <td align="left">config<br align="left"/></td></tr>
+		</table>>
+		shape=plain
+	]
+	plugin [
+		fillcolor="#0044ff22"
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr> <td align="left"><b>lua/js/nginx</b></td> </tr>
+		</table>>
+		shape=plain
+	]
+	helm [
+		fillcolor="#00ff0022"
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr> <td align="left"><b>helm</b><br/></td> </tr>
+			<tr> <td align="left">
+				<i>Input: </i><br align="left"/><br align="left"/>values.yaml<br align="left"/><br align="left"/>templates<br align="left"/>includes<br align="left"/>plugins<br align="left"/>
+			</td></tr>
+		</table>>
+		shape=plain
+	]
+	value -> helm [label="" color="#88000088"]
+	include -> helm [label="" color="#88000088"]
+	template -> helm [label="" color="#88000088"]
+	plugin -> helm [label="" color="#88000088"]
+	deploy [
+		fillcolor="#ff0000ff"
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr> <td align="left"><b>Deploy!</b></td> </tr>
+		</table>>
+		shape=plain
+	]
+	helm -> deploy [label="helm install/upgrade ..." color="#88000088"]
 }

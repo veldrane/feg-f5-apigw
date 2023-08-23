@@ -83,7 +83,7 @@ znovu predstavit projekt, mozna popovidat i jake dalsi varianty jsme zvazovali,
 
 #### Script
 
-- TBD
+Ve fortune jsme se tedy rozhodli vybudovat vlastni apigw nebo nekolik ruznych apigw a to zejmena proto abychom konsolidovali nase api endpointy . Take jsme potrebovali aby vysledne reseni podporovalo nejakym zpusobem oidc nebo oauth2, protoze jeden z cilu projektu bylo i sjednoceni autentizace. Jak jiz bylo receno, velka cast aplikacniho stacku bezi v openshiftu, cheli jsme take reseni, ktere je toutu platformou podporovano a umi vyuzit jeho feature set. A samozrejme jsme chteli reseni ktere bude jednoduse nasaditelne, bude mit nejakou enterprise podporu (prece jen jedna se o jednu z klicovych komponent) a pokud mozno abychom se nemuseli ucit nic slozite noveho. 
 
 #### Todo
 
@@ -94,7 +94,7 @@ znovu predstavit projekt, mozna popovidat i jake dalsi varianty jsme zvazovali,
 
 
 
-### Slide 5 - Geneze projektu
+### Slide 5 - Vyvoj projektu
 
 #### Reveal
 
@@ -108,7 +108,7 @@ znovu predstavit projekt, mozna popovidat i jake dalsi varianty jsme zvazovali,
 
 #### Script
 
-- TBD
+Nekdy zacatkem roku 2020 jsme tedy zacali vybirat reseni ktere by bylo vhodne pro nase prostredi. NA zacatku jsme vybirali z cca 20 ruznych produktu (popsat ve strucnosti jake a jak se s tim mw team popasoval). Behem roku nam postupne vykristalizvoali 4 kandidati (opet pois kteri to byli), na ktere jsme se snazili naroubovat jeden nas konkretni case, jednalo se o integraci sazkovych kiosku na pobockach. A koncem roku jsme se rozhodli ze pujdeme cestou nginx plus. Toto reseni jsme predstavili nakupu, ktery rozhodl o koupi licenci na nginx plus. (Kasa byla realizovana na oss verzi - zminka). Zacali jsme vyvijet a deplojovat reseni apigw pro externi klienty, ktere obsahuje mi mo jine par nasich pluginun pro trasformaci prozadavku tretich stran do reci rest api fortuny (realizovano v lue). Behem rteto faze jsme take vyvinuli jadro helm chartu, ktere umoznovalo na zaklade jednoducheho definiho souboru poskladat apigw na nginx plus dlenasich pozadavku, coz vyrazne zjednodusilo a zrychlilo deployment. Cca v polovine roku 2021 prisla ostra faze projektu, kde jsme zacali integrovat jednu z nasich klicovych aplikaci live3 a vyvijet tzv public api gateway, tedy gateway urcenou pro retailove zakazniky. Soucasti nej byl vyvoj vlastniho nginx pluginu v mod nginx javascript, ktery mel za ukol naplnit keyval databazi oidc tokeny urcenymi pro autentizaci. A tato faze byla zavrsena tento rok v brezno kdy jsme celou public api deplojovali do produkce a cast portalu se autentizovat prave pomoci tohoto modelu. V soucasne dobe pracujeme na integraci ostatnich sluzeb, coz zahrnuje rozrsireni autentizacniho modulu od dalsi endpointy a aplikace. Soubezne s tim probiha prepsani fe a zaroven i agresivnejsi rozdeleni be sluzeb do microservice.
 
 #### Todo
 
